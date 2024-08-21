@@ -1,0 +1,32 @@
+server:
+  port: 8081
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/inventory_service
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+
+
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs

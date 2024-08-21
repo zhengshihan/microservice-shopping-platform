@@ -1,0 +1,36 @@
+server:
+  port: 8066
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: 134344129904b9
+    password: f864d7ec24b6ca
+    protocol: smtp
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notificationService
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring:
+          deserializer:
+            key:
+              delegate:
+                class: org.apache.kafka.common.serialization.StringDeserializer
+            value:
+              delegate:
+                class: io.confluent.kafka.serializers.KafkaAvroDeserializer
+        schema:
+          registry:
+            url: http://localhost:8085
+        specific:
+          avro:
+            reader: true

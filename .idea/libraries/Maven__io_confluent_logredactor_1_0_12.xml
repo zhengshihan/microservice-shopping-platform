@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: io.confluent:logredactor:1.0.12">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/confluent/logredactor/1.0.12/logredactor-1.0.12.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/io/confluent/logredactor/1.0.12/logredactor-1.0.12-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/confluent/logredactor/1.0.12/logredactor-1.0.12-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,37 @@
+server:
+  port: 8060
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/inventory/**
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/order/**
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/api/product/**
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8181/realms/microservice-security
