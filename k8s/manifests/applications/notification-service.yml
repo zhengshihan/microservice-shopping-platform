@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-service
+  template:
+    metadata:
+      labels:
+        app: notification-service
+    spec:
+      containers:
+        - name: notification-service
+          image: zhengshihan/notification-service
+          env:
+            - name: SPRING_KAFKA_BOOTSTRAP-SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_KAFKA_BOOTSTRAP-SERVERS
+                  name: common-config
+            - name: SPRING_KAFKA_CONSUMER_PROPERTIES_SCHEMA_REGISTRY_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_KAFKA_CONSUMER_PROPERTIES_SCHEMA_REGISTRY_URL
+                  name: notification-service-config
+            - name: MAIL_HOST
+              value: "sandbox.smtp.mailtrap.io"  # Mailtrap 主机
+            - name: MAIL_PORT
+              value: "2525"  # Mailtrap 端口
+            - name: MAIL_USERNAME
+              value: "5566642615d0b6"  # Mailtrap 用户名
+            - name: MAIL_PASSWORD
+              value: "6a1383ebf6b647"  # Mailtrap 密码
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notification-service
+spec:
+  selector:
+    app: notification-service
+  ports:
+    - protocol: TCP
+      port: 8066
+      targetPort: 8066
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notification-service-config
+data:
+  SPRING_KAFKA_CONSUMER_PROPERTIES_SCHEMA_REGISTRY_URL: "http://schema-registry.default.svc.cluster.local:8081"

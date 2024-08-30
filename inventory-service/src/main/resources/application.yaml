@@ -1,5 +1,39 @@
+#spring:
+#  application:
+#    name: inventory-service
+#  config:
+#    import: "optional:configserver:http://localhost:8088"
+server:
+  port: 8083
 spring:
   application:
     name: inventory-service
   config:
-    import: "optional:configserver:http://localhost:8088"
+    import: "optional:configserver:http://config-server:80"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/inventory_service
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: none
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: eureka-0
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka

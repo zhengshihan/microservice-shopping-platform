@@ -1,5 +1,48 @@
+
+
+server:
+  port: 8066
+
 spring:
   application:
     name: notification-service
   config:
     import: "optional:configserver:http://localhost:8088"
+  mail:
+    host: 18.215.44.90
+    port: 2525
+    username: 5566642615d0b6
+    password: 6a1383ebf6b647
+    protocol: smtp
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notificationService
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring:
+          deserializer:
+            key:
+              delegate:
+                class: org.apache.kafka.common.serialization.StringDeserializer
+            value:
+              delegate:
+                class: io.confluent.kafka.serializers.KafkaAvroDeserializer
+        schema:
+          registry:
+            url: http://localhost:8085
+        specific:
+          avro:
+            reader: true
+
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: eureka-0
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
