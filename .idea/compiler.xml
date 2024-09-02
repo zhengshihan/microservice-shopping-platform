@@ -12,8 +12,8 @@
         <module name="api-gateway" />
         <module name="product-service" />
         <module name="order-service" />
-        <module name="service-registry" />
         <module name="notification-service" />
+        <module name="service-registry" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

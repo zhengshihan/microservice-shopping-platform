@@ -9,7 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/online-ticket.iml" filepath="$PROJECT_DIR$/.idea/online-ticket.iml" />
       <module fileurl="file://$PROJECT_DIR$/order-service/order-service.iml" filepath="$PROJECT_DIR$/order-service/order-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/product-service/product-service.iml" filepath="$PROJECT_DIR$/product-service/product-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/service-registry/service-registry/service-registry.iml" filepath="$PROJECT_DIR$/service-registry/service-registry/service-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-registry/service-registry.iml" filepath="$PROJECT_DIR$/service-registry/service-registry.iml" />
     </modules>
   </component>
 </project>
