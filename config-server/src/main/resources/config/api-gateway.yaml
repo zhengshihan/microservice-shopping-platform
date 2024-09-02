@@ -29,7 +29,6 @@ spring:
           uri: lb://product-service
           predicates:
             - Path=/api/product/**
-
   security:
     oauth2:
       resourceserver:
