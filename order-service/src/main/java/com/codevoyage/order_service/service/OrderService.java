@@ -34,9 +34,9 @@ public class OrderService {
            order.setQuantity(orderRequest.quantity());
            order.setEventName(orderRequest.eventName());
         orderRepository.save(order);
-           var orderPlacedEvent = new OrderPlacedEvent(order.getOrderNumber(), "mockemail.com",
-                   "fake",
-                   "fake");
+           var orderPlacedEvent = new OrderPlacedEvent(order.getOrderNumber(), orderRequest.userDetails().email(),
+                   orderRequest.userDetails().firstName(),
+                   orderRequest.userDetails().lastName());
            log.info("Start- Sending OrderPlacedEvent {} to Kafka Topic", orderPlacedEvent);
            kafkaTemplate.send("order-placed", orderPlacedEvent);
            log.info("End- Sending OrderPlacedEvent {} to Kafka Topic", orderPlacedEvent);
