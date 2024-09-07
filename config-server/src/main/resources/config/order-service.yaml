@@ -21,6 +21,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+  flyway:
+    locations: classpath:db/migration/order-service
+
   kafka:
     bootstrap-servers: localhost:9092
     template:

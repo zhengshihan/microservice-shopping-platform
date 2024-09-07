@@ -1,5 +1,6 @@
 package com.codevoyage.order_service.service;
 
+import com.codevoyage.inventory_service.dto.InventoryRequest;
 import com.codevoyage.order_service.client.InventoryClient;
 import com.codevoyage.order_service.dto.OrderRequest;
 import com.codevoyage.order_service.event.OrderPlacedEvent;
@@ -39,6 +40,8 @@ public class OrderService {
            log.info("Start- Sending OrderPlacedEvent {} to Kafka Topic", orderPlacedEvent);
            kafkaTemplate.send("order-placed", orderPlacedEvent);
            log.info("End- Sending OrderPlacedEvent {} to Kafka Topic", orderPlacedEvent);
+           InventoryRequest inventoryRequest = new InventoryRequest(orderRequest.eventName(),orderRequest.quantity());
+           inventoryClient.decreaseInventory(inventoryRequest);
     }else {
            throw new RuntimeException("Product with eventName " + orderRequest.eventName() + " is not in stock");
        }

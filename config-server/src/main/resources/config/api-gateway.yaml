@@ -20,18 +20,19 @@ spring:
         - id: inventory-service
           uri: lb://inventory-service
           predicates:
-            - Path=/inventory/**
+            - Path=/api/inventory/**
         - id: order-service
           uri: lb://order-service
           predicates:
-            - Path=/order/**
+            - Path=/api/order/**
         - id: product-service
           uri: lb://product-service
           predicates:
             - Path=/api/product/**
 
+
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8181/realms/microservice-security
+          issuer-uri: http://localhost:8181/realms/react-reaml

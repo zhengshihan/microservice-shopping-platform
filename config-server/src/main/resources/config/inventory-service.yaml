@@ -21,6 +21,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+  flyway:
+    locations: classpath:db/migration/inventory-service
 
 
 
