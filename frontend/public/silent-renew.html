@@ -1,0 +1,30 @@
+<!-- public/silent-renew.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Silent Renew</title>
+    <script src="https://unpkg.com/oidc-client-ts@latest/dist/oidc-client-ts.umd.js"></script>
+    <script>
+      // 初始化 OIDC UserManager
+      const userManager = new Oidc.UserManager({
+        authority: "http://localhost:8181/realms/react-reaml",
+        client_id: "react-login-client",
+        silent_redirect_uri: window.location.origin + "/silent-renew.html",
+        scope: "openid profile email",
+        response_type: "code",
+      });
+
+      // 静默刷新 Token
+      userManager
+        .signinSilent()
+        .then((user) => {
+          console.log("Token refreshed successfully", user);
+        })
+        .catch((err) => {
+          console.error("Silent token refresh error", err);
+        });
+    </script>
+  </head>
+  <body></body>
+</html>
